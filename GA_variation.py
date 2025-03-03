@@ -1,11 +1,9 @@
 #coding=utf-8
 
 ####################
-#这一版本是遗传算法的纯变异版，不考虑交叉
-#思路为计算局部最优，但局部最优不代表就是全局最优，因此，最后的效果可能不会很完美
-#注意：由于用的是有限染色体数量，因此全图渲染的效果可能并不会很好，最好用白底图片测试
-#Date: 2019.07.22
-#Author : zhanchenchang
+#This version is a pure mutation version of the genetic algorithm, without considering crossover.
+#The approach is to compute the local optimum, but a local optimum does not necessarily represent the global optimum. Therefore, the final result may not be perfect.
+#Note: Since a limited number of chromosomes are used, the rendering effect of the entire image may not be very good. It is recommended to test with a white background image.
 ####################
 
 import cv2
@@ -16,13 +14,16 @@ import time
 import os,sys
 
 
-#颜色通道RGB A默认为半透明
+#The color channels RGB A are set to be semi-transparent by default.
 channels = 2
-#图片大小
+
 IMG_SIZE = 100
-#染色体单元图像有几个点
+
+
+#The basic pattern of the chromosome has several corners.
 unit_shape_points = 3
-#染色体数量
+
+#The number of chromosome
 unit_num = 100
 
 class shell():
@@ -31,18 +32,20 @@ class shell():
 
     def __init__(self):
         self.fitness = 0
-        #初始化点的矩阵
+        
+        #init basic pattern of the chromosome
         self.unit_points = np.random.randint(0,IMG_SIZE,(unit_num,unit_shape_points, 2))
-        #初始化相应的颜色
+        
+        #init color
         self.unit_channels = np.random.randint(0,256,(unit_num,channels))
 
-    # 单独画出每个染色体
+    # Draw each chromosome separately.
     def draw_whole_unit(self):
         self.units = np.full((unit_num,IMG_SIZE,IMG_SIZE,channels), 0)
         for i in range(unit_num):
             cv2.fillPoly(self.units[i],[self.unit_points[i]],tuple(self.unit_channels[i].tolist()))
 
-    # 将染色体组合到一起
+    # combine chromosome
     def draw(self):
         #background_color is white
         self.img = np.full((IMG_SIZE,IMG_SIZE,channels-1), 255)
@@ -187,7 +190,7 @@ def target_channels(target_img):
             break
 
 def main():
-    img = cv2.imread("./firefox.jpg")
+    img = cv2.imread("./target.jpg")
     target_channels(img)
     Shell_1 = shell()
     Shell_1.draw_whole_unit()
@@ -195,7 +198,7 @@ def main():
     Shell_1.target_format(img)
     Shell_1.fitness = Shell_1.fit()
     
-    dirpath = "./firefox"
+    dirpath = "./target"
     
     if not os.path.exists(dirpath):
         os.mkdir(dirpath)
