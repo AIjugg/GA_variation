@@ -38,29 +38,44 @@ The core idea of genetic algorithms is to simulate biological evolution 🏞️,
 
 1️⃣ Initialization (Population Generation) 🎲
 
+
 A group of possible solutions (individuals) is randomly generated, forming the initial population. Each individual is usually represented using binary encoding (e.g., 11001) or real-number encoding.
+
+
 2️⃣ Fitness Evaluation 📊
+
 
 The fitness value of each individual is calculated to measure how good the solution is. The fitness function varies depending on the problem. For example:
 In path optimization 🚗, fitness could be the total path length (shorter is better).
 In image fitting 🖼️, fitness could be the error value (lower is better).
+
 3️⃣ Selection 🎯
+
 
 The best individuals are chosen for reproduction based on their fitness. Common selection methods include:
 Roulette Wheel Selection 🎡
 Tournament Selection 🏅
+
+
 4️⃣ Crossover (Recombination) 🔄
+
 
 Selected individuals exchange genetic information to generate new offspring. Common crossover methods include:
 Single-point crossover ➖: A random point is chosen, and the latter part is swapped.
 Multi-point crossover ➕: Multiple points are chosen for swapping.
 Uniform crossover 🔀: Each gene is swapped with a certain probability.
+
+
 5️⃣ Mutation 🧪
+
 
 Some genes are randomly altered to maintain population diversity and avoid premature convergence. Examples:
 Binary encoding: Flip 0 → 1 or 1 → 0 🔁.
 Real-number encoding: Apply a small random perturbation to a value.
+
+
 6️⃣ New Generation Formation 🌱
+
 
 After selection, crossover, and mutation, a new population is formed. The process repeats until a termination condition is met (e.g., reaching the maximum number of iterations or finding an optimal solution).
 
